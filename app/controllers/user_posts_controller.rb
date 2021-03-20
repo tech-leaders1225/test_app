@@ -4,7 +4,7 @@ class UserPostsController < ApplicationController
 
   # GET /user_posts or /user_posts.json
   def index
-    @user_posts = UserPost.all
+    @user_posts = current_user.user_posts
   end
 
   # GET /user_posts/1 or /user_posts/1.json
@@ -22,7 +22,7 @@ class UserPostsController < ApplicationController
 
   # POST /user_posts or /user_posts.json
   def create
-    @user_post = UserPost.new(user_post_params)
+    @user_post = current_user.user_posts.new(user_post_params)
 
     respond_to do |format|
       if @user_post.save
@@ -60,7 +60,7 @@ class UserPostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_post
-      @user_post = UserPost.find(params[:id])
+      @user_post = current_user.user_posts.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
